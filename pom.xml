@@ -19,19 +19,6 @@
 				<configuration>
 				</configuration>
 			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-assembly-plugin</artifactId>
-				<version>2.2-beta-5</version>
-				<configuration>
-					<filters>
-						<filter>src/assemble/filter.properties</filter>
-					</filters>
-					<descriptors>
-						<descriptor>src/assemble/distribution.xml</descriptor>
-					</descriptors>
-				</configuration>
-			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
@@ -45,7 +32,7 @@
 			<artifactId>ebean</artifactId>
 			<version>${pom.version}</version>
 			<type>jar</type>
-			<classifier>enhance</classifier>
+			<classifier>agent</classifier>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -58,9 +45,9 @@
 		<dependency>
 			<groupId>org.avaje</groupId>
 			<artifactId>ebean</artifactId>
-			<version>2.5.0-BETA1</version>
+			<version>2.5.0-BETA2</version>
 			<type>jar</type>
-			<classifier>enhance</classifier>
+			<classifier>agent</classifier>
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
