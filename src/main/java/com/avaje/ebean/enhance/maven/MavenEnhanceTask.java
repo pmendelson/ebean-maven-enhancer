@@ -1,4 +1,4 @@
-package org.avaje.ebean_enhancer;
+package com.avaje.ebean.enhance.maven;
 
 import java.io.File;
 
@@ -62,7 +62,7 @@ import com.avaje.ebean.enhance.ant.TransformationListener;
  * @goal enhance
  * @phase process-classes
  */
-public class EnhanceTask extends AbstractMojo {
+public class MavenEnhanceTask extends AbstractMojo {
 	/**
 	 * the classpath used to search for e.g. inerited classes
 	 * @parameter
