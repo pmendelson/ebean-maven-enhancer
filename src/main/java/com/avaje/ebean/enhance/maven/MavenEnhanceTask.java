@@ -37,7 +37,7 @@ import com.avaje.ebean.enhance.ant.TransformationListener;
  *   
  *    &lt;plugin&gt;
  *      &lt;groupId&gt;org.avaje&lt;/groupId&gt;
- *      &lt;artifactId&gt;ebean&lt;/artifactId&gt;
+ *      &lt;artifactId&gt;ebean-enhancer-plugin&lt;/artifactId&gt;
  *      &lt;version&gt;2.5&lt;/version&gt;
  *      &lt;executions&gt;
  *        &lt;execution&gt;
@@ -55,6 +55,11 @@ import com.avaje.ebean.enhance.ant.TransformationListener;
  *      &lt;/configuration&gt;
  *    &lt;/plugin&gt;
  * </pre>
+ * <p>To invoke explicitly:<br/>
+ * <code>
+ * &nbsp;&nbsp;&nbsp;&nbsp;mvn ebean-enhancer:enhance
+ * </code>
+ * </p>
  * @author Paul Mendelson
  * @version $Revision$, $Date$
  * @since 2.5, Mar, 2009
