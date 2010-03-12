@@ -7,7 +7,6 @@ import org.apache.maven.plugin.MojoExecutionException;
 import org.apache.maven.plugin.logging.Log;
 
 import com.avaje.ebean.enhance.agent.Transformer;
-import com.avaje.ebean.enhance.ant.AntEnhanceTask;
 import com.avaje.ebean.enhance.ant.OfflineFileTransform;
 import com.avaje.ebean.enhance.ant.TransformationListener;
 
@@ -125,7 +124,7 @@ public class MavenEnhanceTask extends AbstractMojo {
 			extraClassPath.append(classpath);
 		}
 		Transformer t = new Transformer(extraClassPath.toString(), transformArgs);
-		ClassLoader cl = AntEnhanceTask.class.getClassLoader();
+		ClassLoader cl = MavenEnhanceTask.class.getClassLoader();
 		log.info("classSource="+classSource+"  transformArgs="+transformArgs
 			+"  classDestination="+classDestination+"  packages="+packages);
 		OfflineFileTransform ft = new OfflineFileTransform(t, cl, classSource, classDestination);
