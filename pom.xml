@@ -5,7 +5,7 @@
 	<artifactId>ebean-enhancer-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
 	<version>2.5.0-BETA2</version>
-	<name>ebean-enhance Maven Mojo</name>
+	<name>ebean-enhancer: Maven byte code enhancement tool</name>
 	<url>http://www.avaje.org</url>
 	<scm>
 		<connection>scm:git:git://github.com/pmendelson/ebean-maven-enhancer</connection>
@@ -49,6 +49,28 @@
 			</plugin>
 		</plugins>
 	</build>
+	<reporting>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-project-info-reports-plugin</artifactId>
+				<version>2.1.2</version>
+				<configuration>
+					<webAccessUrl>http://github.com/pmendelson/ebean-maven-enhancer</webAccessUrl>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-plugin-plugin</artifactId>
+				<version>2.5.1</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.6.1</version>
+			</plugin>
+		</plugins>
+	</reporting>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.maven</groupId>
@@ -61,7 +83,6 @@
 			<version>${pom.version}</version>
 			<type>jar</type>
 			<classifier>agent</classifier>
-			<scope>runtime</scope>
 		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
