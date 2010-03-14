@@ -60,7 +60,7 @@ import com.avaje.ebean.enhance.ant.TransformationListener;
  * </code>
  * </p>
  * @author Paul Mendelson
- * @version $Revision$, $Date$
+ * @version $Revision: 789 $, $Date: 2010-03-12 10:51:49 -0500 (Fri, 12 Mar 2010) $
  * @since 2.5, Mar, 2009
  * @see com.avaje.ebean.enhance.ant.AntEnhanceTask
  * @goal enhance
