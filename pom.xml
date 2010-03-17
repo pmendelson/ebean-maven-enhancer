@@ -21,6 +21,11 @@
 			<name>avaje.repo</name>
 			<url>http://www.avaje.org/archiva/repository/internal</url>
 		</repository>
+		<snapshotRepository>
+			<id>avaje.repo</id>
+			<name>avaje.repo</name>
+			<url>http://www.avaje.org/archiva/repository/snapshots</url>
+		</snapshotRepository>
 	</distributionManagement>
 	<build>
 		<plugins>
