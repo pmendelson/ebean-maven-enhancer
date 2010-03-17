@@ -36,7 +36,7 @@ import com.avaje.ebean.enhance.ant.TransformationListener;
  *   
  *    &lt;plugin&gt;
  *      &lt;groupId&gt;org.avaje&lt;/groupId&gt;
- *      &lt;artifactId&gt;ebean-enhancer-plugin&lt;/artifactId&gt;
+ *      &lt;artifactId&gt;ebean-maven-enhancement-plugin&lt;/artifactId&gt;
  *      &lt;version&gt;2.5&lt;/version&gt;
  *      &lt;executions&gt;
  *        &lt;execution&gt;
@@ -60,7 +60,7 @@ import com.avaje.ebean.enhance.ant.TransformationListener;
  * </code>
  * </p>
  * @author Paul Mendelson
- * @version $Revision: 789 $, $Date: 2010-03-12 10:51:49 -0500 (Fri, 12 Mar 2010) $
+ * @version $Revision$, $Date$
  * @since 2.5, Mar, 2009
  * @see com.avaje.ebean.enhance.ant.AntEnhanceTask
  * @goal enhance

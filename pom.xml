@@ -2,26 +2,26 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.avaje</groupId>
-	<artifactId>ebean-maven-enhancer</artifactId>
+	<artifactId>ebean-maven-enhancement-plugin</artifactId>
 	<packaging>maven-plugin</packaging>
-	<version>2.5.0</version>
-	<name>ebean-maven-enhancer: Maven byte code enhancement tool</name>
+	<version>2.5.0-SNAPSHOT</version>
+	<name>ebean-maven-enhancement-plugin: Maven byte code enhancement tool</name>
 	<url>http://www.avaje.org</url>
 	<scm>
 		<connection>scm:git:git://github.com/pmendelson/ebean-maven-enhancer</connection>
 		<url>scm:git:git://github.com/pmendelson/ebean-maven-enhancer</url>
 	</scm>
 	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>	
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>avaje.repo</id>
 			<name>avaje.repo</name>
 			<url>http://www.avaje.org/archiva/repository/internal</url>
 		</repository>
-	</distributionManagement>		
+	</distributionManagement>
 	<build>
 		<plugins>
 			<plugin>
@@ -55,8 +55,31 @@
 				<artifactId>maven-plugin-plugin</artifactId>
 				<version>2.5.1</version>
 				<configuration>
-					<goalPrefix>ebean-maven-enhancer</goalPrefix>
+					<goalPrefix>ebean-enhancer</goalPrefix>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.6.1</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
@@ -98,7 +121,7 @@
 		<dependency>
 			<groupId>org.avaje</groupId>
 			<artifactId>ebean</artifactId>
-			<version>2.5.0-BETA3</version>
+			<version>${pom.version}</version>
 			<type>jar</type>
 			<classifier>agent</classifier>
 			<scope>compile</scope>
