@@ -23,8 +23,9 @@
 		</license>
 	</licenses>
 	<scm>
-		<connection>scm:git:git://github.com/pmendelson/ebean-maven-enhancer</connection>
-		<url>scm:git:git://github.com/pmendelson/ebean-maven-enhancer</url>
+		<connection>scm:svn:http://ebeanorm.svn.sourceforge.net/svnroot/ebeanorm/ebean-maven-enhancer/trunk/</connection>
+		<developerConnection>scm:svn:https://ebeanorm.svn.sourceforge.net/svnroot/ebeanorm/ebean-maven-enhancer/trunk/</developerConnection>
+		<url>http://ebeanorm.svn.sourceforge.net/svnroot/ebeanorm/ebean-maven-enhancer/trunk/</url>
 	</scm>
 	<!-- 
 	<distributionManagement>
