@@ -12,6 +12,7 @@
 	<name>ebean-maven-enhancement-plugin: Maven byte code enhancement tool</name>
 	<url>http://www.avaje.org</url>
 	<properties>
+		<ebean.version>2.7.1</ebean.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<licenses>
@@ -26,20 +27,7 @@
 		<developerConnection>scm:svn:https://ebeanorm.svn.sourceforge.net/svnroot/ebeanorm/ebean-maven-enhancer/trunk/</developerConnection>
 		<url>http://ebeanorm.svn.sourceforge.net/svnroot/ebeanorm/ebean-maven-enhancer/trunk/</url>
 	</scm>
-	<!-- 
-	<distributionManagement>
-		<repository>
-			<id>avaje.repo</id>
-			<name>avaje.repo</name>
-			<url>http://www.avaje.org/archiva/repository/internal</url>
-		</repository>
-		<snapshotRepository>
-			<id>avaje.repo</id>
-			<name>avaje.repo</name>
-			<url>http://www.avaje.org/archiva/repository/snapshots</url>
-		</snapshotRepository>
-	</distributionManagement>
-	 -->
+	
 	<build>
 		<plugins>
 			<plugin>
@@ -139,7 +127,7 @@
 		<dependency>
 			<groupId>org.avaje</groupId>
 			<artifactId>ebean</artifactId>
-			<version>2.7.0</version>
+			<version>${ebean.version}</version>
 			<type>jar</type>
 			<classifier>agent</classifier>
 			<scope>compile</scope>
