@@ -12,7 +12,7 @@
 	<name>ebean-maven-enhancement-plugin: Maven byte code enhancement tool</name>
 	<url>http://www.avaje.org</url>
 	<properties>
-		<ebean.version>2.7.1</ebean.version>
+		<ebean.version>2.7.2</ebean.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<licenses>
