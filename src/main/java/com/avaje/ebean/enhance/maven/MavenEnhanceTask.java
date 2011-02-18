@@ -1,6 +1,7 @@
 package com.avaje.ebean.enhance.maven;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import org.apache.maven.artifact.Artifact;
 import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
 import org.apache.maven.artifact.resolver.ArtifactResolutionException;
+import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
 
 /**
@@ -100,6 +102,14 @@ public class MavenEnhanceTask extends AbstractMojo {
 	/** @parameter default-value="${project.distributionManagementArtifactRepository}" */
 	private ArtifactRepository deploymentRepository;
 	/**
+	 * The Maven Session Object
+	 * 
+	 * @parameter expression="${session}"
+	 * @required
+	 * @readonly
+	 */
+	private MavenSession session;
+	/**
 	 * Desired scope (either compile or test)
 	 * 
 	 * @parameter scope
@@ -148,26 +158,34 @@ public class MavenEnhanceTask extends AbstractMojo {
 
 	public void execute() throws MojoExecutionException {
 		final Log log = getLog();
-        if(scope==null) {
-            if(execution.getExecutionId().toLowerCase().contains("test"))
-                scope="test-";
-            else
-                scope="";
-        }
+		if (scope == null) {
+			if (execution.getExecutionId().toLowerCase().contains("test"))
+				scope = "test-";
+			else
+				scope = "";
+		}
+		try {
+			log.info(proj.getArtifactId() + " p=" + proj.getParent() + "  " + proj.getModulePathAdjustment(proj)
+					+ "  pwd=" + new File(".").getAbsolutePath());
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		if (classSource == null)
-			classSource = "target/"+scope+"classes";
+			classSource = (session.getExecutionRootDirectory().endsWith(proj.getArtifactId()) //
+					? "" : proj.getArtifactId() + "/") //
+					+ "target/" + scope + "classes";
 		if (classDestination == null)
 			classDestination = classSource;
 		File f = new File("");
-		log.info("Current Directory: " + f.getAbsolutePath());
 
 		StringBuilder extraClassPath = new StringBuilder();
 		List dependencySet = proj.getDependencies();
 		for (Iterator i = dependencySet.iterator(); i.hasNext();) {
 			Dependency d = (Dependency) i.next();
 			if (inScope(d)) {
-			Artifact artifact = artifactFactory.createArtifact(d.getGroupId(), d.getArtifactId(), d.getVersion(),
-					d.getClassifier(), "jar");
+				Artifact artifact = artifactFactory.createArtifact(d.getGroupId(), d.getArtifactId(), d.getVersion(),
+						d.getClassifier(), "jar");
 				appendArtifact(extraClassPath, artifact);
 			}
 		}
@@ -198,7 +216,7 @@ public class MavenEnhanceTask extends AbstractMojo {
 	private boolean inScope(Dependency d) {
 		boolean ok = true;
 		if (!scope.equalsIgnoreCase("test-"))
-			ok=! "test".equalsIgnoreCase(d.getScope());
+			ok = !"test".equalsIgnoreCase(d.getScope());
 		if (!ok)
 			getLog().info("skipping " + d.getArtifactId());
 		return ok;
