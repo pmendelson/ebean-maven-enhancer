@@ -1,7 +1,6 @@
 package com.avaje.ebean.enhance.maven;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,10 +14,8 @@ import com.avaje.ebean.enhance.ant.OfflineFileTransform;
 import com.avaje.ebean.enhance.ant.TransformationListener;
 
 import org.apache.maven.artifact.Artifact;
-import org.apache.maven.artifact.repository.ArtifactRepository;
 import org.apache.maven.artifact.resolver.ArtifactNotFoundException;
 import org.apache.maven.artifact.resolver.ArtifactResolutionException;
-import org.apache.maven.execution.MavenSession;
 import org.apache.maven.model.Dependency;
 
 /**
@@ -97,18 +94,11 @@ public class MavenEnhanceTask extends AbstractMojo {
 	private org.apache.maven.artifact.repository.ArtifactRepository localRepository;
 
 	/** @parameter default-value="${project.remoteArtifactRepositories}" */
-	private java.util.List remoteRepositories;
+	private List<?> remoteRepositories;
 
-	/** @parameter default-value="${project.distributionManagementArtifactRepository}" */
-	private ArtifactRepository deploymentRepository;
-	/**
-	 * The Maven Session Object
-	 * 
-	 * @parameter expression="${session}"
-	 * @required
-	 * @readonly
-	 */
-	private MavenSession session;
+	/** @parameter default-value="${project.build.directory}" */
+	private File buildDir;
+
 	/**
 	 * Desired scope (either compile or test)
 	 * 
@@ -164,25 +154,15 @@ public class MavenEnhanceTask extends AbstractMojo {
 			else
 				scope = "";
 		}
-		try {
-			log.info(proj.getArtifactId() + " p=" + proj.getParent() + "  " + proj.getModulePathAdjustment(proj)
-					+ "  pwd=" + new File(".").getAbsolutePath());
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		if (classSource == null)
-			classSource = (session.getExecutionRootDirectory().endsWith(proj.getArtifactId()) //
-					? "" : proj.getArtifactId() + "/") //
-					+ "target/" + scope + "classes";
+			classSource = new File(buildDir, scope + "classes").getAbsolutePath();
 		if (classDestination == null)
 			classDestination = classSource;
-		File f = new File("");
 
 		StringBuilder extraClassPath = new StringBuilder();
-		List dependencySet = proj.getDependencies();
-		for (Iterator i = dependencySet.iterator(); i.hasNext();) {
-			Dependency d = (Dependency) i.next();
+		List<Dependency> dependencySet = proj.getDependencies();
+		for (Iterator<Dependency> i = dependencySet.iterator(); i.hasNext();) {
+			Dependency d = i.next();
 			if (inScope(d)) {
 				Artifact artifact = artifactFactory.createArtifact(d.getGroupId(), d.getArtifactId(), d.getVersion(),
 						d.getClassifier(), "jar");
@@ -226,7 +206,7 @@ public class MavenEnhanceTask extends AbstractMojo {
 		try {
 			resolver.resolve(artifact, remoteRepositories, localRepository);
 			File artifactFile = artifact.getFile();
-			getLog().info("arg=" + artifactFile.getAbsolutePath());
+			getLog().debug("Classpath member " + artifactFile.getAbsolutePath());
 			extraClassPath.append(artifactFile.getAbsolutePath() + ";");
 		} catch (ArtifactResolutionException e) {
 			getLog().info(e.getMessage());
